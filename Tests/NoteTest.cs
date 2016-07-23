@@ -6,69 +6,69 @@ using Xunit;
 
 namespace PersonalManagement
 {
-  public class CategoryTest : IDisposable
+  public class NoteTest : IDisposable
   {
-    public CategoryTest()
+    public NoteTest()
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=personal_management_test;Integrated Security=SSPI;";
     }
     [Fact]
     public void Test_Empty_DatabaseEmptyAtFirst()
     {
-      int dBValues = Category.GetAll().Count;
+      int dBValues = Note.GetAll().Count;
       Assert.Equal(0, dBValues);
     }
     [Fact]
     public void Test_Equals_EntriesMatch()
     {
-      Category firstCategory = new Category ("Pet Chores");
-      Category secondCategory = new Category ("Pet Chores");
-      Assert.Equal(firstCategory, secondCategory);
+      Note firstNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      Note secondNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      Assert.Equal(firstNote, secondNote);
     }
     [Fact]
-    public void Test_Save_SavesCategoryToDatabase()
+    public void Test_Save_SavesNoteToDatabase()
     {
-      Category newCategory = new Category ("Pet Chores");
-      newCategory.Save();
-      List<Category> manualCategoryList = new List<Category> {newCategory};
-      List<Category> methodCategoryList = Category.GetAll();
-      Assert.Equal(manualCategoryList, methodCategoryList);
+      Note newNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      newNote.Save();
+      List<Note> manualNoteList = new List<Note> {newNote};
+      List<Note> methodNoteList = Note.GetAll();
+      Assert.Equal(manualNoteList, methodNoteList);
     }
     [Fact]
-    public void Test_Find_ReturnsCategoryById()
+    public void Test_Find_ReturnsNoteById()
     {
-      Category newCategory = new Category ("Pet Chores");
-      newCategory.Save();
-      Category foundCategory = Category.Find(newCategory.GetId());
-      Assert.Equal(newCategory, foundCategory);
+      Note newNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      newNote.Save();
+      Note foundNote = Note.Find(newNote.GetId());
+      Assert.Equal(newNote, foundNote);
     }
     [Fact]
-    public void Test_Update_UpdatesCategoryEntry()
+    public void Test_Update_UpdatesNoteEntry()
     {
-      Category newCategory = new Category ("Pet Chores");
-      newCategory.Save();
-      newCategory.SetName("Pet Chores - Meghan");
-      newCategory.Update();
-      Category foundCategory = Category.Find(newCategory.GetId());
-      Category updatedCategory = new Category ("Pet Chores - Meghan");
-      Assert.Equal(newCategory.GetName(), foundCategory.GetName());
-      Assert.Equal(newCategory.GetName(), updatedCategory.GetName());
+      Note newNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      newNote.Save();
+      newNote.SetTitle("Random Science Questions");
+      newNote.Update();
+      Note foundNote = Note.Find(newNote.GetId());
+      Note updatedNote = new Note ("Random Science Questions", "Do caterpillars know that they will turn into butterflies?");
+      Assert.Equal(newNote.GetTitle(), foundNote.GetTitle());
+      Assert.Equal(newNote.GetTitle(), updatedNote.GetTitle());
     }
     [Fact]
-    public void Test_DeleteOne_DeletesOneCategory()
+    public void Test_DeleteOne_DeletesOneNote()
     {
-      Category firstCategory = new Category ("Pet Chores");
-      firstCategory.Save();
-      Category secondCategory = new Category ("Household Chores");
-      secondCategory.Save();
-      firstCategory.DeleteOne();
-      List<Category> reducedCategoryList = new List<Category> {secondCategory};
-      List<Category> deletedCategoryList = Category.GetAll();
-      Assert.Equal(reducedCategoryList, deletedCategoryList);
+      Note firstNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      firstNote.Save();
+      Note secondNote = new Note ("Birthday Present Ideas", "1. Adopt a dog, 2. Adopt a cat");
+      secondNote.Save();
+      firstNote.DeleteOne();
+      List<Note> reducedNoteList = new List<Note> {secondNote};
+      List<Note> deletedNoteList = Note.GetAll();
+      Assert.Equal(reducedNoteList, deletedNoteList);
     }
     public void Dispose()
     {
-      Category.DeleteAll();
+      Note.DeleteAll();
     }
   }
 }
