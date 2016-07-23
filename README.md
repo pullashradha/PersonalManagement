@@ -4,7 +4,7 @@
 
 ## Description
 
-This program is a personal management web application. A user is able to create a private, secure account, and manage their address book, todo list, budget and notes online.
+This program is a personal management web application. A user is able to create a private, secure account, and manage their todo list, notes, address book, and budget online.
 
 ## Setup/Installation Requirements
 
@@ -82,7 +82,9 @@ The program should ... | Example Input | Example Output
 
 HTML | CSS | C#
 ----- | ----- | -----
---- | --- | ---
+--- | --- | Add a period tracker
+--- | --- | Add account creation capabilities & verification
+--- | --- | Develop web app into a mobile app
 
 ## Support and Contact Details
 
