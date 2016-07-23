@@ -1,6 +1,6 @@
 # Personal Management Webpage
 
-#### By Shradha Pulla, August 2016
+#### By Shradha Pulla, July 2016
 
 ## Description
 
