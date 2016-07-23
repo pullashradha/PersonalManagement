@@ -35,6 +35,27 @@ To build the databases from scratch, type the commands below in the Windows Powe
   * Desktop> SQLCMD -S "Server-Name";
     * 1> CREATE DATABASE personal_management;
     * 2> GO
+    * 3> USE personal_management;
+    * 4> GO
+    * 5> CREATE TABLE tasks
+    * 6> (
+    * 7> id INT IDENTITY(1,1),
+    * 8> description VARCHAR(255)
+    * 9> );
+    * 10> GO
+    * 11> CREATE TABLE categories
+    * 12> (
+    * 13> id INT IDENTITY(1,1),
+    * 14> name VARCHAR(100)
+    * 15> );
+    * 16> GO
+    * 17> CREATE TABLE notes
+    * 18> (
+    * 19> id INT IDENTITY(1,1),
+    * 20> title VARCHAR(100),
+    * 21> content VARCHAR(5000)
+    * 22> );
+    * 23> GO
   * Exit out of SQLCMD by typing> QUIT
   * Open SSMS, click open Databases folder and check that the personal_management database has been created
   * Click "New Query" button on top nav bar (above "!Execute")
