@@ -84,7 +84,10 @@ No known bugs.
 
 The program should ... | Example Input | Example Output
 ----- | ----- | -----
---- | --- | ---
+Have CRUD functionality for tasks in todo list | --- | ---
+Have CRUD functionality for categories in todo list | --- | ---
+Have CRUD functionality for notes | --- | ---
+Have CRUD functionality for tags | --- | ---
 
 ## Future Features
 
