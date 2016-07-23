@@ -90,7 +90,7 @@ The program should ... | Example Input | Example Output
 
 HTML | CSS | C#
 ----- | ----- | -----
---- | --- | Add a period tracker
+--- | --- | Add a shopping list, calculator, calendar & period tracker
 --- | --- | Add account creation capabilities & verification
 --- | --- | Develop web app into a mobile app
 
