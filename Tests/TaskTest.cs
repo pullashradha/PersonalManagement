@@ -21,14 +21,14 @@ namespace PersonalManagement
     [Fact]
     public void Test_Equals_EntriesMatch()
     {
-      Task firstTask = new Task ("Walk the dog");
-      Task secondTask = new Task ("Walk the dog");
+      Task firstTask = new Task ("Walk the dog", new DateTime(2020,7,25));
+      Task secondTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       Assert.Equal(firstTask, secondTask);
     }
     [Fact]
     public void Test_Save_SavesTaskToDatabase()
     {
-      Task newTask = new Task ("Walk the dog");
+      Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       newTask.Save();
       List<Task> manualTaskList = new List<Task> {newTask};
       List<Task> methodTaskList = Task.GetAll();
@@ -37,7 +37,7 @@ namespace PersonalManagement
     [Fact]
     public void Test_Find_ReturnsTaskById()
     {
-      Task newTask = new Task ("Walk the dog");
+      Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       newTask.Save();
       Task foundTask = Task.Find(newTask.GetId());
       Assert.Equal(newTask, foundTask);
@@ -45,21 +45,21 @@ namespace PersonalManagement
     [Fact]
     public void Test_Update_UpdatesTaskEntry()
     {
-      Task newTask = new Task ("Walk the dog");
+      Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       newTask.Save();
-      newTask.SetDescription("Walk the dog in the park");
+      newTask.SetDueDate("Walk the dog", new DateTime(2020,7,26));
       newTask.Update();
       Task foundTask = Task.Find(newTask.GetId());
-      Task updatedTask = new Task ("Walk the dog in the park");
-      Assert.Equal(newTask.GetDescription(), foundTask.GetDescription());
-      Assert.Equal(newTask.GetDescription(), updatedTask.GetDescription());
+      Task updatedTask = new Task ("Walk the dog", new DateTime(2020,7,26));
+      Assert.Equal(newTask.GetDueDate(), foundTask.GetDueDate());
+      Assert.Equal(newTask.GetDueDate(), updatedTask.GetDueDate());
     }
     [Fact]
     public void Test_DeleteOne_DeletesOneTask()
     {
-      Task firstTask = new Task ("Walk the dog");
+      Task firstTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       firstTask.Save();
-      Task secondTask = new Task ("Feed the cat");
+      Task secondTask = new Task ("Feed the cat", new DateTime(2020,7,25));
       secondTask.Save();
       firstTask.DeleteOne();
       List<Task> reducedTaskList = new List<Task> {secondTask};

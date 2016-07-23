@@ -8,10 +8,12 @@ namespace PersonalManagement
   {
     private int _id;
     private string _description;
-    public Task (string Description, int Id = 0)
+    private DateTime? _dueDate;
+    public Task (string Description, DateTime? DueDate, int Id = 0)
     {
       _id = Id;
       _description = Description;
+      _dueDate = DueDate;
     }
     public int GetId()
     {
@@ -25,6 +27,14 @@ namespace PersonalManagement
     {
       _description = newDescription;
     }
+    public DateTime? GetDueDate()
+    {
+      return _dueDate;
+    }
+    public void SetDueDate (DateTime? newDueDate)
+    {
+      _dueDate = newDueDate;
+    }
     public override bool Equals (System.Object otherTask)
     {
       if (otherTask is Task)
@@ -32,7 +42,8 @@ namespace PersonalManagement
         Task newTask = (Task) otherTask;
         bool idEquality = (this.GetId() == newTask.GetId());
         bool descriptionEquality = (this.GetDescription() == newTask.GetDescription());
-        return (idEquality && descriptionEquality);
+        bool dueDateEquality = (this.GetDueDate() == newTask.GetDueDate());
+        return (idEquality && descriptionEquality && dueDateEquality);
       }
       else
       {
@@ -44,11 +55,15 @@ namespace PersonalManagement
       SqlConnection conn = DB.Connection();
       conn.Open();
       SqlDataReader rdr;
-      SqlCommand cmd = new SqlCommand ("INSERT INTO tasks (description) OUTPUT INSERTED.id VALUES (@TaskDescription);", conn);
+      SqlCommand cmd = new SqlCommand ("INSERT INTO tasks (description, due_date) OUTPUT INSERTED.id VALUES (@TaskDescription, @TaskDueDate);", conn);
       SqlParameter descriptionParameter = new SqlParameter();
       descriptionParameter.ParameterName = "@TaskDescription";
       descriptionParameter.Value = this.GetDescription();
+      SqlParameter dueDateParameter = new SqlParameter();
+      dueDateParameter.ParameterName = "@TaskDueDate";
+      dueDateParameter.Value = this.GetDueDate();
       cmd.Parameters.Add(descriptionParameter);
+      cmd.Parameters.Add(dueDateParameter);
       rdr = cmd.ExecuteReader();
       while (rdr.Read())
       {
@@ -75,7 +90,8 @@ namespace PersonalManagement
       {
         int taskId = rdr.GetInt32(0);
         string taskDescription = rdr.GetString(1);
-        Task newTask = new Task (taskDescription, taskId);
+        DateTime? taskDueDate = rdr.GetDateTime(2);
+        Task newTask = new Task (taskDescription,taskDueDate, taskId);
         allTasks.Add(newTask);
       }
       if (rdr != null)
@@ -104,7 +120,8 @@ namespace PersonalManagement
       {
         int taskId = rdr.GetInt32(0);
         string taskDescription = rdr.GetString(1);
-        Task foundTask = new Task (taskDescription, taskId);
+        DateTime? taskDueDate = rdr.GetString(2);
+        Task foundTask = new Task (taskDescription, taskDueDate, taskId);
         foundTasks.Add(foundTask);
       }
       if (rdr != null)
@@ -121,14 +138,18 @@ namespace PersonalManagement
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand ("UPDATE tasks SET description = @NewTaskDescription WHERE id = @TaskId;", conn);
+      SqlCommand cmd = new SqlCommand ("UPDATE tasks SET description = @NewTaskDescription, due_date = @NewTaskDueDate WHERE id = @TaskId;", conn);
       SqlParameter newDescriptionParameter = new SqlParameter();
       newDescriptionParameter.ParameterName = "@NewTaskDescription";
       newDescriptionParameter.Value = this.GetDescription();
+      SqlParameter newDueDateParameter = new SqlParameter();
+      newDueDateParameter.ParameterName = "@NewTaskDueDate";
+      newDueDateParameter.Value = this.GetDueDate();
       SqlParameter idParameter = new SqlParameter();
       idParameter.ParameterName = "@TaskId";
       idParameter.Value = this.GetId();
       cmd.Parameters.Add(newDescriptionParameter);
+      cmd.Parameters.Add(newDueDateParameter);
       cmd.Parameters.Add(idParameter);
       cmd.ExecuteNonQuery();
       if (conn != null)
