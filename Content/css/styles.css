@@ -1,0 +1,10 @@
+*,
+*::before,
+*::after {
+  font-family: serif;
+  color: #000000;
+  background-color: #FFFFFF;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
