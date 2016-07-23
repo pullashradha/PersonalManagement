@@ -47,12 +47,12 @@ namespace PersonalManagement
     {
       Task newTask = new Task ("Walk the dog");
       newTask.Save();
-      newTask.SetName("Walk the dog in the park");
+      newTask.SetDescription("Walk the dog in the park");
       newTask.Update();
       Task foundTask = Task.Find(newTask.GetId());
       Task updatedTask = new Task ("Walk the dog in the park");
-      Assert.Equal(newTask.GetName(), foundTask.GetName());
-      Assert.Equal(newTask.GetName(), updatedTask.GetName());
+      Assert.Equal(newTask.GetDescription(), foundTask.GetDescription());
+      Assert.Equal(newTask.GetDescription(), updatedTask.GetDescription());
     }
     [Fact]
     public void Test_DeleteOne_DeletesOneTask()

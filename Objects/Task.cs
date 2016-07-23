@@ -119,12 +119,12 @@ namespace PersonalManagement
     }
     public void Update ()
     {
-      SqlConnection conn = DB.Connection()
+      SqlConnection conn = DB.Connection();
       conn.Open();
       SqlCommand cmd = new SqlCommand ("UPDATE tasks SET description = @NewTaskDescription WHERE id = @TaskId;", conn);
-      SqlParameter newDecriptionParameter = new SqlParameter();
+      SqlParameter newDescriptionParameter = new SqlParameter();
       newDescriptionParameter.ParameterName = "@NewTaskDescription";
-      newDescription.Value = this.GetDescription();
+      newDescriptionParameter.Value = this.GetDescription();
       SqlParameter idParameter = new SqlParameter();
       idParameter.ParameterName = "@TaskId";
       idParameter.Value = this.GetId();
