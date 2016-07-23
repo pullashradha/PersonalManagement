@@ -43,27 +43,35 @@ To build the databases from scratch, type the commands below in the Windows Powe
     * 8> description VARCHAR(255)
     * 9> due_date DATETIME
     * 10> );
-    * 11> GO
-    * 12> CREATE TABLE categories
-    * 13> (
-    * 14> id INT IDENTITY(1,1),
-    * 15> name VARCHAR(100)
-    * 16> );
-    * 17> GO
-    * 18> CREATE TABLE notes
-    * 19> (
-    * 20> id INT IDENTITY(1,1),
-    * 21> title VARCHAR(100),
-    * 22> content VARCHAR(5000)
-    * 23> );
-    * 24> GO
-    * 25> CREATE TABLE todo_list
-    * 26> (
-    * 27> id INT IDENTITY(1,1),
-    * 28> task_id INT,
-    * 29> category_id INT
-    * 30> );
-    * 31> GO
+    * 11> CREATE TABLE categories
+    * 12> (
+    * 13> id INT IDENTITY(1,1),
+    * 14> name VARCHAR(100)
+    * 15> );
+    * 16> CREATE TABLE notes
+    * 17> (
+    * 18> id INT IDENTITY(1,1),
+    * 19> title VARCHAR(100),
+    * 20> content VARCHAR(5000)
+    * 21> );
+    * 22> CREATE TABLE tags
+    * 23> (
+    * 24> id INT IDENTITY(1,1),
+    * 25> name VARCHAR(100)
+    * 26> );
+    * 27> CREATE TABLE todo_list
+    * 28> (
+    * 29> id INT IDENTITY(1,1),
+    * 30> task_id INT,
+    * 31> category_id INT
+    * 32> );
+    * 33> CREATE TABLE notes_tags
+    * 34> (
+    * 35> id INT IDENTITY(1,1);
+    * 36> note_id INT,
+    * 37> tag_id INT
+    * 38> );
+    * 39> GO
   * Exit out of SQLCMD by typing> QUIT
   * Open SSMS, click open Databases folder and check that the personal_management database has been created
   * Click "New Query" button on top nav bar (above "!Execute")
