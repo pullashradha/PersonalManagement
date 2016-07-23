@@ -47,7 +47,7 @@ namespace PersonalManagement
     {
       Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       newTask.Save();
-      newTask.SetDueDate("Walk the dog", new DateTime(2020,7,26));
+      newTask.SetDueDate(new DateTime(2020,7,26));
       newTask.Update();
       Task foundTask = Task.Find(newTask.GetId());
       Task updatedTask = new Task ("Walk the dog", new DateTime(2020,7,26));
