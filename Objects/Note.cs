@@ -104,6 +104,63 @@ namespace PersonalManagement
       }
       return allNotes;
     }
+    public void AddTag (Tag newTag)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO notes_tags (note_id, tag_id) VALUES (@NoteId, @TagId);", conn);
+      SqlParameter noteIdParameter = new SqlParameter();
+      noteIdParameter.ParameterName = "@NoteId";
+      noteIdParameter.Value = this.GetId();
+      SqlParameter tagIdParameter = new SqlParameter();
+      tagIdParameter.ParameterName = "@TagId";
+      tagIdParameter.Value = newTag.GetId();
+      cmd.Parameters.Add(noteIdParameter);
+      cmd.Parameters.Add(tagIdParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public List<Tag> GetTags()
+    {
+      List<Tag> allTags = new List<Tag> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT tags.* FROM tags JOIN notes_tags ON (tags.id = notes_tags.tag_id) JOIN notes ON (notes.id = notes_tags.note_id) WHERE notes.id = @NoteId;", conn);
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@NoteId";
+      idParameter.Value = this.GetId();
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int tagId = rdr.GetInt32(0);
+        string tagName = rdr.GetString(1);
+        Tag newTag = new Tag (tagName, tagId);
+        allTags.Add(newTag);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allTags;
+    }
     public static Note Find (int queryId)
     {
       List<Note> foundNotes = new List<Note> {};

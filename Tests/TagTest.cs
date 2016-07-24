@@ -81,7 +81,7 @@ namespace PersonalManagement
     public void Dispose()
     {
       Tag.DeleteAll();
-      Note.DeleteAll();
+      Note.DeleteAll(); //But what if I don't want the notes to be deleted along with the tags?
     }
   }
 }

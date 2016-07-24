@@ -35,6 +35,21 @@ namespace PersonalManagement
       Assert.Equal(manualNoteList, methodNoteList);
     }
     [Fact]
+    public void Test_GetTags_ReturnsAllTagsByNote()
+    {
+      Note newNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
+      newNote.Save();
+      Tag firstTag = new Tag ("~Science");
+      firstTag.Save();
+      Tag secondTag = new Tag ("~Questions");
+      secondTag.Save();
+      newNote.AddTag(firstTag);
+      newNote.AddTag(secondTag);
+      List<Tag> manualTagList = new List<Tag> {firstTag, secondTag};
+      List<Tag> methodTagList = newNote.GetTags();
+      Assert.Equal(manualTagList, methodTagList);
+    }
+    [Fact]
     public void Test_Find_ReturnsNoteById()
     {
       Note newNote = new Note ("Random Questions", "Do caterpillars know that they will turn into butterflies?");
@@ -69,6 +84,7 @@ namespace PersonalManagement
     public void Dispose()
     {
       Note.DeleteAll();
+      Tag.DeleteAll();
     }
   }
 }
