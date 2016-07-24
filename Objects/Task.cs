@@ -8,8 +8,8 @@ namespace PersonalManagement
   {
     private int _id;
     private string _description;
-    private DateTime? _dueDate;
-    public Task (string Description, DateTime? DueDate, int Id = 0)
+    private DateTime _dueDate;
+    public Task (string Description, DateTime DueDate = default(DateTime), int Id = 0)
     {
       _id = Id;
       _description = Description;
@@ -27,11 +27,11 @@ namespace PersonalManagement
     {
       _description = newDescription;
     }
-    public DateTime? GetDueDate()
+    public DateTime GetDueDate()
     {
       return _dueDate;
     }
-    public void SetDueDate (DateTime? newDueDate)
+    public void SetDueDate (DateTime newDueDate)
     {
       _dueDate = newDueDate;
     }
@@ -90,7 +90,7 @@ namespace PersonalManagement
       {
         int taskId = rdr.GetInt32(0);
         string taskDescription = rdr.GetString(1);
-        DateTime? taskDueDate = rdr.GetDateTime(2);
+        DateTime taskDueDate = rdr.GetDateTime(2);
         Task newTask = new Task (taskDescription,taskDueDate, taskId);
         allTasks.Add(newTask);
       }
@@ -177,7 +177,7 @@ namespace PersonalManagement
       {
         int taskId = rdr.GetInt32(0);
         string taskDescription = rdr.GetString(1);
-        DateTime? taskDueDate = rdr.GetDateTime(2);
+        DateTime taskDueDate = rdr.GetDateTime(2);
         Task foundTask = new Task (taskDescription, taskDueDate, taskId);
         foundTasks.Add(foundTask);
       }

@@ -132,7 +132,7 @@ namespace PersonalManagement
       {
         int taskId = rdr.GetInt32(0);
         string taskName = rdr.GetString(1);
-        DateTime? taskDueDate = rdr.GetDateTime(2);
+        DateTime taskDueDate = rdr.GetDateTime(2);
         Task newTask = new Task (taskName, taskDueDate, taskId);
         allTasks.Add(newTask);
       }
