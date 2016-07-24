@@ -35,6 +35,18 @@ namespace PersonalManagement
       Assert.Equal(manualTaskList, methodTaskList);
     }
     [Fact]
+    public void Test_GetCategories_ReturnsAllCategoriesByTask()
+    {
+      Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
+      newTask.Save();
+      Category newCategory = new Category ("Pet Chores");
+      newCategory.Save();
+      newTask.AddCategory(newCategory);
+      List<Category> manualCategoryList = new List<Category> {newCategory};
+      List<Category> methodCategoryList = newTask.GetCategories();
+      Assert.Equal(manualCategoryList, methodCategoryList);
+    }
+    [Fact]
     public void Test_Find_ReturnsTaskById()
     {
       Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
@@ -69,6 +81,7 @@ namespace PersonalManagement
     public void Dispose()
     {
       Task.DeleteAll();
+      Category.DeleteAll();
     }
   }
 }
