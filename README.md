@@ -96,6 +96,14 @@ Have CRUD functionality for tasks in todo list | --- | ---
 Have CRUD functionality for categories in todo list | --- | ---
 Have CRUD functionality for notes | --- | ---
 Have CRUD functionality for tags | --- | ---
+View all categories for a task | --- | ---
+View all tasks for a category | --- | ---
+View all tags for a note | --- | ---
+View all notes for a tag | --- | ---
+Search for a task by name or due date | --- | ---
+Search for a category by name | --- | ---
+Search for a note by title | --- | ---
+Search for a tag by name | --- | ---
 
 ## Future Features
 
