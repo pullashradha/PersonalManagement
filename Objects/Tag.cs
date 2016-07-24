@@ -88,6 +88,64 @@ namespace PersonalManagement
       }
       return allTags;
     }
+    public void AddNote (Note newNote)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO notes_tags (note_id, tag_id) VALUES (@NoteId, @TagId);", conn);
+      SqlParameter noteIdParameter = new SqlParameter();
+      noteIdParameter.ParameterName = "@NoteId";
+      noteIdParameter.Value = newNote.GetId();
+      SqlParameter tagIdParameter = new SqlParameter();
+      tagIdParameter.ParameterName = "@TagId";
+      tagIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(noteIdParameter);
+      cmd.Parameters.Add(tagIdParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public List<Note> GetNotes()
+    {
+      List<Note> allNotes = new List<Note> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT notes.* FROM notes JOIN notes_tags ON (notes.id = notes_tags.note_id) JOIN tags ON (tags.id = notes_tags.tag_id) WHERE tags.id = @TagId;", conn);
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@TagId";
+      idParameter.Value = this.GetId();
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int noteId = rdr.GetInt32(0);
+        string noteTitle = rdr.GetString(1);
+        string noteContent = rdr.GetString(2);
+        Note newNote = new Note (noteTitle, noteContent, noteId);
+        allNotes.Add(newNote);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allNotes;
+    }
     public static Tag Find (int queryId)
     {
       List<Tag> foundTags = new List<Tag> {};
