@@ -88,6 +88,64 @@ namespace PersonalManagement
       }
       return allCategories;
     }
+    public void AddTask (Task newTask)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO todo_list (task_id, category_id) VALUES (@TaskId, @CategoryId);", conn);
+      SqlParameter taskIdParameter = new SqlParameter();
+      taskIdParameter.ParameterName = "@TaskId";
+      taskIdParameter.Value = newTask.GetId();
+      SqlParameter categoryIdParameter = new SqlParameter();
+      categoryIdParameter.ParameterName = "@CategoryId";
+      categoryIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(taskIdParameter);
+      cmd.Parameters.Add(categoryIdParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public List<Task> GetTasks()
+    {
+      List<Task> allTasks = new List<Task> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT tasks.* FROM tasks JOIN todo_list ON (tasks.id = todo_list.task_id) JOIN categories ON (categories.id = todo_list.category_id) WHERE categories.id = @CategoryId;", conn);
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@CategoryId";
+      idParameter.Value = this.GetId();
+      cmd.Parameters.Add(idParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int taskId = rdr.GetInt32(0);
+        string taskName = rdr.GetString(1);
+        DateTime? taskDueDate = rdr.GetDateTime(2);
+        Task newTask = new Task (taskName, taskDueDate, taskId);
+        allTasks.Add(newTask);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allTasks;
+    }
     public static Category Find (int queryId)
     {
       List<Category> foundCategories = new List<Category> {};
