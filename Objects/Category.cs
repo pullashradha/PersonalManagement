@@ -175,22 +175,19 @@ namespace PersonalManagement
       }
       return foundCategories[0];
     }
-    public static Category FindByName (string queryName)
+    public static List<Category> FindByName (string queryName)
     {
-      string[] splitQueryName = queryName.Split(" ");
+      string lowerCaseQuery = queryName.ToLower();
+      string[] splitQueryName = lowerCaseQuery.Split(new char[0]);
       foreach (string word in splitQueryName)
       {
-        if (queryName.Contains(word))
+        if (lowerCaseQuery.Contains(word))
         {
           List<Category> foundCategories = new List<Category> {};
           SqlConnection conn = DB.Connection();
           conn.Open();
           SqlDataReader rdr;
-          SqlCommand cmd = new SqlCommand ("SELECT * FROM categories WHERE name = @QueryName;", conn);
-          SqlParameter nameParameter = new SqlParameter();
-          nameParameter.ParameterName = "@QueryName";
-          nameParameter.Value = queryName;
-          cmd.Parameters.Add(nameParameter);
+          SqlCommand cmd = new SqlCommand ("SELECT * FROM categories;", conn);
           rdr = cmd.ExecuteReader();
           while (rdr.Read())
           {
@@ -207,10 +204,11 @@ namespace PersonalManagement
           {
             conn.Close();
           }
-          return foundCategories[0];
+          return foundCategories;
         }
       }
-      Category noMatchCategory = new Category ("No match found.");
+      Category messageCategory = new Category ("No matches found.");
+      List<Category> noMatchCategory = new List<Category> {messageCategory};
       return noMatchCategory;
     }
     public void Update ()
