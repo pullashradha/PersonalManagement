@@ -175,6 +175,35 @@ namespace PersonalManagement
       }
       return foundCategories[0];
     }
+    public static Category FindByName (string queryName)
+    {
+      List<Category> foundCategories = new List<Category> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM categories WHERE name = @QueryName;", conn);
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@QueryName";
+      nameParameter.Value = queryName;
+      cmd.Parameters.Add(nameParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int categoryId = rdr.GetInt32(0);
+        string categoryName = rdr.GetString(1);
+        Category foundCategory = new Category (categoryName, categoryId);
+        foundCategories.Add(foundCategory);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundCategories[0];
+    }
     public void Update ()
     {
       SqlConnection conn = DB.Connection();

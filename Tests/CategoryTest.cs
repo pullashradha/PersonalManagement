@@ -55,6 +55,14 @@ namespace PersonalManagement
       Assert.Equal(newCategory, foundCategory);
     }
     [Fact]
+    public void Test_FindByName_ReturnsCategoryByName()
+    {
+      Category newCategory = new Category ("Pet Chores");
+      newCategory.Save();
+      Category foundCategory = Category.FindByName("Pet Chores");
+      Assert.Equal(newCategory, foundCategory);
+    }
+    [Fact]
     public void Test_Update_UpdatesCategoryEntry()
     {
       Category newCategory = new Category ("Pet Chores");
