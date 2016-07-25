@@ -55,6 +55,14 @@ namespace PersonalManagement
       Assert.Equal(newTask, foundTask);
     }
     [Fact]
+    public void Test_FindByName_FindsTaskByName()
+    {
+      Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
+      newTask.Save();
+      Task foundTask = Task.FindByName("Walk the dog");
+      Assert.Equal(newTask, foundTask);
+    }
+    [Fact]
     public void Test_Update_UpdatesTaskEntry()
     {
       Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
