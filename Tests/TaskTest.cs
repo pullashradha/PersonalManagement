@@ -55,11 +55,11 @@ namespace PersonalManagement
       Assert.Equal(newTask, foundTask);
     }
     [Fact]
-    public void Test_FindByName_FindsTaskByName()
+    public void Test_FindByDate_FindsTaskByDueDate()
     {
       Task newTask = new Task ("Walk the dog", new DateTime(2020,7,25));
       newTask.Save();
-      Task foundTask = Task.FindByName("Walk the dog");
+      Task foundTask = Task.FindByDate(new DateTime(2020,7,25));
       Assert.Equal(newTask, foundTask);
     }
     [Fact]

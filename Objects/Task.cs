@@ -191,6 +191,36 @@ namespace PersonalManagement
       }
       return foundTasks[0];
     }
+    public static Task FindByDate (DateTime queryDate)
+    {
+      List<Task> foundTasks = new List<Task> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM tasks WHERE due_date = @QueryDate;", conn);
+      SqlParameter dueDateParameter = new SqlParameter();
+      dueDateParameter.ParameterName = "@QueryDate";
+      dueDateParameter.Value = queryDate;
+      cmd.Parameters.Add(dueDateParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int taskId = rdr.GetInt32(0);
+        string taskName = rdr.GetString(1);
+        DateTime taskDueDate = rdr.GetDateTime(2);
+        Task foundTask = new Task (taskName, taskDueDate, taskId);
+        foundTasks.Add(foundTask);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundTasks[0];
+    }
     public void Update ()
     {
       SqlConnection conn = DB.Connection();
