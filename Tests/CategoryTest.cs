@@ -59,7 +59,7 @@ namespace PersonalManagement
     {
       Category newCategory = new Category ("Pet Chores");
       newCategory.Save();
-      Category foundCategory = Category.FindByName("Pet Chores");
+      Category foundCategory = Category.FindByName("Pet");
       Assert.Equal(newCategory, foundCategory);
     }
     [Fact]
