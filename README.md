@@ -111,6 +111,7 @@ HTML | CSS | C#
 ----- | ----- | -----
 --- | --- | Add a shopping list, calculator, calendar & period tracker
 --- | --- | Add account creation capabilities & verification
+--- | --- | Allow users to text other users through the web & mobile app
 --- | --- | Develop web app into a mobile app
 
 ## Support and Contact Details

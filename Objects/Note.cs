@@ -138,7 +138,7 @@ namespace PersonalManagement
       SqlConnection conn = DB.Connection();
       conn.Open();
       SqlDataReader rdr;
-      SqlCommand cmd = new SqlCommand ("SELECT tags.* FROM tags JOIN notes_tags ON (tags.id = notes_tags.tag_id) JOIN notes ON (notes.id = notes_tags.note_id) WHERE notes.id = @NoteId;", conn);
+      SqlCommand cmd = new SqlCommand ("SELECT tags.* FROM notes JOIN notes_tags ON (notes.id = notes_tags.note_id) JOIN tags ON (tags.id = notes_tags.tag_id) WHERE notes.id = @NoteId;", conn);
       SqlParameter idParameter = new SqlParameter();
       idParameter.ParameterName = "@NoteId";
       idParameter.Value = this.GetId();

@@ -138,7 +138,7 @@ namespace PersonalManagement
       SqlConnection conn = DB.Connection();
       conn.Open();
       SqlDataReader rdr;
-      SqlCommand cmd = new SqlCommand ("SELECT categories.* FROM categories JOIN todo_list ON (categories.id = todo_list.category_id) JOIN tasks ON (tasks.id = todo_list.task_id) WHERE tasks.id = @TaskId;", conn);
+      SqlCommand cmd = new SqlCommand ("SELECT categories.* FROM tasks JOIN todo_list ON (tasks.id = todo_list.task_id) JOIN categories ON (categories.id = todo_list.category_id) WHERE tasks.id = @TaskId;", conn);
       SqlParameter idParameter = new SqlParameter();
       idParameter.ParameterName = "@TaskId";
       idParameter.Value = this.GetId();
