@@ -175,43 +175,7 @@ namespace PersonalManagement
       }
       return foundCategories[0];
     }
-    public static List<Category> FindByName (string queryName)
-    {
-      string lowerCaseQuery = queryName.ToLower();
-      string[] splitQueryName = lowerCaseQuery.Split(new char[0]);
-      foreach (string word in splitQueryName)
-      {
-        if (lowerCaseQuery.Contains(word))
-        {
-          List<Category> foundCategories = new List<Category> {};
-          SqlConnection conn = DB.Connection();
-          conn.Open();
-          SqlDataReader rdr;
-          SqlCommand cmd = new SqlCommand ("SELECT * FROM categories;", conn);
-          rdr = cmd.ExecuteReader();
-          while (rdr.Read())
-          {
-            int categoryId = rdr.GetInt32(0);
-            string categoryName = rdr.GetString(1);
-            Category foundCategory = new Category (categoryName, categoryId);
-            foundCategories.Add(foundCategory);
-          }
-          if (rdr != null)
-          {
-            rdr.Close();
-          }
-          if (conn != null)
-          {
-            conn.Close();
-          }
-          return foundCategories;
-        }
-      }
-      Category messageCategory = new Category ("No matches found.");
-      List<Category> noMatchCategory = new List<Category> {messageCategory};
-      return noMatchCategory;
-    }
-    public void Update ()
+    public void Update()
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
