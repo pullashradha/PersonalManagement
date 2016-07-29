@@ -47,12 +47,12 @@ namespace PersonalManagement
     {
       Account newAccount = new Account ("Rubab", "Shah", "shah@gmail.com", "503-555-5555", "rshah", "colors");
       newAccount.Save();
-      newAccount.SetName("Rubab ^^");
+      newAccount.SetFirstName("Rubab ^^");
       newAccount.Update();
       Account foundAccount = Account.Find(newAccount.GetId());
-      Account updatedAccount = new Account ("Rubab ^^");
-      Assert.Equal(newAccount.GetName(), foundAccount.GetName());
-      Assert.Equal(newAccount.GetName(), updatedAccount.GetName());
+      Account updatedAccount = new Account ("Rubab ^^", "Shah", "shah@gmail.com", "503-555-5555", "rshah", "colors");
+      Assert.Equal(newAccount.GetFirstName(), foundAccount.GetFirstName());
+      Assert.Equal(newAccount.GetFirstName(), updatedAccount.GetFirstName());
     }
     [Fact]
     public void Test_DeleteOne_DeletesOneAccount()

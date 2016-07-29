@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-firstNamespace PersonalManagement
+namespace PersonalManagement
 {
   public class Account
   {
@@ -12,7 +12,7 @@ firstNamespace PersonalManagement
     private string _email;
     private string _phoneNumber;
     private string _username;
-    private string _password
+    private string _password;
     public Account (string FirstName, string LastName, string Email, string PhoneNumber, string Username, string Password, int Id = 0)
     {
       _id = Id;
@@ -82,7 +82,7 @@ firstNamespace PersonalManagement
         Account newAccount = (Account) otherAccount;
         bool idEquality = (this.GetId() == newAccount.GetId());
         bool firstNameEquality = (this.GetFirstName() == newAccount.GetFirstName());
-        bool lastNameEquality = (this.GeLastName() == newAccount.GeLastName());
+        bool lastNameEquality = (this.GetLastName() == newAccount.GetLastName());
         bool emailEquality = (this.GetEmail() == newAccount.GetEmail());
         bool phoneNumberEquality = (this.GetPhoneNumber() == newAccount.GetPhoneNumber());
         bool usernameEquality = (this.GetUsername() == newAccount.GetUsername());
