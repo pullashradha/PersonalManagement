@@ -34,44 +34,54 @@ This program can only be accessed on a PC with Windows 10, and with Git, Atom, a
 To build the databases from scratch, type the commands below in the Windows PowerShell:
   * Desktop> SQLCMD -S "Server-Name";
     * 1> CREATE DATABASE personal_management;
-    * 2> GO
-    * 3> USE personal_management;
-    * 4> GO
-    * 5> CREATE TABLE tasks
-    * 6> (
-    * 7> id INT IDENTITY(1,1),
-    * 8> description VARCHAR(255)
-    * 9> due_date DATETIME
-    * 10> );
-    * 11> CREATE TABLE categories
-    * 12> (
-    * 13> id INT IDENTITY(1,1),
-    * 14> name VARCHAR(100)
-    * 15> );
-    * 16> CREATE TABLE notes
-    * 17> (
-    * 18> id INT IDENTITY(1,1),
-    * 19> title VARCHAR(100),
-    * 20> content VARCHAR(5000)
-    * 21> );
-    * 22> CREATE TABLE tags
-    * 23> (
-    * 24> id INT IDENTITY(1,1),
-    * 25> name VARCHAR(100)
-    * 26> );
-    * 27> CREATE TABLE todo_list
-    * 28> (
-    * 29> id INT IDENTITY(1,1),
-    * 30> task_id INT,
-    * 31> category_id INT
-    * 32> );
-    * 33> CREATE TABLE notes_tags
-    * 34> (
-    * 35> id INT IDENTITY(1,1);
-    * 36> note_id INT,
-    * 37> tag_id INT
-    * 38> );
-    * 39> GO
+    * GO
+    * USE personal_management;
+    * GO
+    * CREATE TABLE tasks
+    * (
+    * id INT IDENTITY(1,1),
+    * description VARCHAR(255)
+    * due_date DATETIME
+    * );
+    * CREATE TABLE categories
+    * (
+    * id INT IDENTITY(1,1),
+    * name VARCHAR(100)
+    * );
+    * CREATE TABLE notes
+    * (
+    * id INT IDENTITY(1,1),
+    * title VARCHAR(100),
+    * content VARCHAR(5000)
+    * );
+    * CREATE TABLE tags
+    * (
+    * id INT IDENTITY(1,1),
+    * name VARCHAR(100)
+    * );
+    * CREATE TABLE accounts
+    * (
+    * id INT IDENTITY(1,1),
+    * first_name VARCHAR(255),
+    * last_name VARCHAR(255),
+    * email VARCHAR(255),
+    * phone_number VARCHAR(255),
+    * username VARCHAR(50),
+    * password VARCHAR(50)
+    * );
+    * CREATE TABLE todo_list
+    * (
+    * id INT IDENTITY(1,1),
+    * task_id INT,
+    * category_id INT
+    * );
+    * CREATE TABLE notes_tags
+    * (
+    * id INT IDENTITY(1,1);
+    * note_id INT,
+    * tag_id INT
+    * );
+    * GO
   * Exit out of SQLCMD by typing> QUIT
   * Open SSMS, click open Databases folder and check that the personal_management database has been created
   * Click "New Query" button on top nav bar (above "!Execute")
@@ -92,6 +102,7 @@ No known bugs.
 
 The program should ... | Example Input | Example Output
 ----- | ----- | -----
+Have CRUD functionality for accounts | --- | ---
 Have CRUD functionality for tasks in todo list | --- | ---
 Have CRUD functionality for categories in todo list | --- | ---
 Have CRUD functionality for notes | --- | ---
