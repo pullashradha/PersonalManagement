@@ -1,4 +1,4 @@
-# Personal Management Webpage
+# Personal Management
 
 #### By Shradha Pulla, July 2016
 
@@ -100,7 +100,7 @@ No known bugs.
 
 ## Specifications
 
-The program should ... | Example Input | Example Output
+The program should... | Example Input | Example Output
 ----- | ----- | -----
 Have CRUD functionality for accounts | --- | ---
 Have CRUD functionality for tasks in todo list | --- | ---
